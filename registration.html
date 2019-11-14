@@ -11,24 +11,50 @@ git push
 
 <head>
     <script>
-        function validate() {
-            var fname = document.getElementById("regForm_fname").value;
-            var lname = document.getElementById("regForm_lname").value;
-            var email = document.getElementById("regForm_email").value;
-            var phone = document.getElementById("regForm_phone").value;
-            var what = document.getElementById("regForm_courses").value
-            var password = document.getElementById("regForm_pass").value;
-            var address = ddocument.getElementById("regForm_address").value;
-            if (fname.value == "") {
-                window.alert("Please enter your name.");
-                fname.focus();
+        function process() {
+            var firstName = document.querySelector('input[name="firstName"]');
+            var lastName = document.querySelector('input[name="lastName"]');
+            var dateBirth = document.querySelector('input[name="dateBirth"]');
+            var genders = document.querySelectorAll('input[name="gender"]');
+            var address = document.querySelector('input[name="address"]');
+            var email = document.querySelector('input[name="email"]');
+            var password = document.querySelector('input[name="password"]');
+            var phone = document.querySelector('input[name="phone"]');
+            var courses = document.querySelector('select[name="courses"]');
+            var comments = document.querySelector('textarea[name="comments"]');
+            
+            if (firstName.value == "") {
+                window.alert("Please enter your first name.");
+                firstName.focus();
                 return false;
             }
-            if (lname.value == "") {
-                window.alert("Please enter your name.");
-                lname.focus();
+            if (lastName.value == "") {
+                window.alert("Please enter your last name.");
+                lastName.focus();
                 return false;
             }
+            if (dateBirth.value == "") {
+                window.alert("Please enter your birthday.");
+                dateBirth.focus();
+                return false;
+            }
+            console.log("genders: " + genders);
+            
+            var gender = "";
+
+            for (var i = 0, len = genders.length; i < len; i++){
+               if(genders[i].checked){
+                   gender = genders[i].value;
+                   break;
+               }               
+            } 
+            
+            console.log("gender:" + gender);
+            if (gender == "") {                
+                window.alert("Please enter your gender.");
+                gender.focus();
+                return false;
+            }            
             if (address.value == "") {
                 window.alert("Please enter your address.");
                 address.focus();
@@ -49,12 +75,23 @@ git push
                 password.focus();
                 return false;
             }
-            if (what.selectedIndex < 1) {
+            if (courses.selectedIndex < 0) {
                 alert("Please enter your course.");
-                what.focus();
+                courses.focus();
                 return false;
             }
-            return true;
+            if (courses.selectedOptions.length >2 ) {
+                console.log(courses.selectedOptions);
+                alert("Select no more than 2.");
+                courses.focus();
+                return false;
+            }            
+            if (comments.length < 10) {
+                alert("We appreciate your comments");
+                comments.focus();
+                return false;
+            }
+            return false;
         }
     </script>
 
@@ -87,29 +124,29 @@ git push
 
 <body>
     <h1 style="text-align: center"> REGISTRATION FORM </h1>
-    <form id="regForm" onsubmit="return validate()">
+    <form id="regForm" onsubmit="return process();">  <!-- "return false;" keeps the input values -->
 
         <p>First Name:
-            <input id="regForm_fname" type="text" size=65 name="firstName"> </p>
-        <br>
+            <input type="text" size=65 name="firstName"> </p>
         <p>Last Name:
-            <input id="regForm_lname" type="text" size=65 name="lastName"> </p>
-        <br>
+            <input type="text" size=65 name="lastName"> </p>
+        <p>Date of Birth:
+            <input type="text" size=65 name="dateBirth"> </p>
+        <p>Please select your gender:</p>
+            <input type="radio" name="gender" value="male">Male<br>
+            <input type="radio" name="gender" value="female">Female<br>
+            <input type="radio" name="gender" value="other">Other<br>               
         <p> Address:
-            <input id="regForm_address" type="text" size=65 name="Address"> </p>
-        <br>
+            <input type="text" size=65 name="address"> </p>
         <p>E-mail Address:
-            <input id="regForm_email" type="text" size=65 name="EMail"> </p>
-        <br>
+            <input type="text" size=65 name="email"> </p>
         <p>Password:
-            <input id="regForm_pass" type="password" size=65 name="Password"> </p>
-        <br>
+            <input type="password" size=65 name="password"> </p>
         <p>Telephone:
-            <input id="regForm_phone" type="text" size=65 name="Telephone"> </p>
-        <br>
+            <input type="text" size=65 name="phone"> </p>
 
-        <p>SELECT YOUR COURSE
-            <select id="regForm_courses" type="text" value="" name="Subject">
+        <p>Select Your Courses
+            <select multiple name="courses">
                 <option>BTECH</option>
                 <option>BBA</option>
                 <option>BCA</option>
@@ -118,13 +155,11 @@ git push
             </select>
         </p>
         <br>
-        <br>
         <p>Comments:
-            <textarea id="regForm_comment"  cols="55" name="Comment"> </textarea>
+            <textarea cols="55" name="comments"> </textarea>
         </p>
         <p>
             <input type="submit" value="send" name="Submit">
-            <input type="reset" value="Reset" name="Reset">
         </p>
     </form>
 </body>
