@@ -12,16 +12,16 @@ git push
 <head>
     <script>
         function process() {
-            var firstName = document.querySelector('input[name="firstName"]');
-            var lastName = document.querySelector('input[name="lastName"]');
-            var dateBirth = document.querySelector('input[name="dateBirth"]');
-            var genders = document.querySelectorAll('input[name="gender"]');
-            var address = document.querySelector('input[name="address"]');
-            var email = document.querySelector('input[name="email"]');
-            var password = document.querySelector('input[name="password"]');
-            var phone = document.querySelector('input[name="phone"]');
-            var courses = document.querySelector('select[name="courses"]');
-            var comments = document.querySelector('textarea[name="comments"]');
+            const firstName = document.querySelector('input[name="firstName"]');
+            const lastName = document.querySelector('input[name="lastName"]');
+            const dateBirth = document.querySelector('input[name="dateBirth"]');
+            const genders = document.querySelectorAll('input[name="gender"]');
+            const address = document.querySelector('input[name="address"]');
+            const email = document.querySelector('input[name="email"]');
+            const password = document.querySelector('input[name="password"]');
+            const phone = document.querySelector('input[name="phone"]');
+            const courses = document.querySelector('select[name="courses"]');
+            const comments = document.querySelector('textarea[name="comments"]');
             
             if (firstName.value == "") {
                 window.alert("Please enter your first name.");
@@ -40,14 +40,18 @@ git push
             }
             console.log("genders: " + genders);
             
-            var gender = "";
+            let gender = "";
 
-            for (var i = 0, len = genders.length; i < len; i++){
+            for (let i = 0, len = genders.length; i < len; i++){
                if(genders[i].checked){
                    gender = genders[i].value;
                    break;
                }               
             } 
+            
+            let gs = [...genders]; 
+            let gselected = gs.find(item => item.checked);
+            gender = gselected.value;
             
             console.log("gender:" + gender);
             if (gender == "") {                
@@ -75,13 +79,15 @@ git push
                 password.focus();
                 return false;
             }
+
             if (courses.selectedIndex < 0) {
                 alert("Please enter your course.");
                 courses.focus();
                 return false;
             }
             if (courses.selectedOptions.length >2 ) {
-                console.log(courses.selectedOptions);
+                const selectedCourses = courses.selectedOptions;
+                console.log(selectedCourses);
                 alert("Select no more than 2.");
                 courses.focus();
                 return false;
@@ -91,7 +97,7 @@ git push
                 comments.focus();
                 return false;
             }
-            return false;
+            return true;
         }
     </script>
 
@@ -161,6 +167,13 @@ git push
         <p>
             <input type="submit" value="send" name="Submit">
         </p>
+    </form>
+    
+    Another form: <br>
+    <form onsubmit="alert('Thank you. Good bye.'); return false;">
+    <p>First Name:
+      <input type="text" size=65 name="firstName"> </p>
+      <input type="submit" value="send" name="Submit">
     </form>
 </body>
 
