@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <p style="font-size:4vw;" align="center">A stretchy clock</p>
+
+    <p id="hrminsec" style="font-size:16vw;" align="center">
+    </p>
+
+    <p id="mdyy" style="font-size:10vw;" align="center">
+    </p>
+
+    <script>
+        let tick = setInterval(updateTime, 1000);
+
+        function updateTime() {
+            let d = new Date();
+            document.querySelector("#hrminsec").innerHTML = d.toLocaleTimeString();
+            document.querySelector("#mdyy").innerHTML = d.toLocaleDateString();
+        }
+    </script>
+
+</body>
+
+</html>
