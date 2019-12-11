@@ -22,22 +22,29 @@ git push
             const phone = document.querySelector('input[name="phone"]');
             const courses = document.querySelector('select[name="courses"]');
             const comments = document.querySelector('textarea[name="comments"]');
+            const profile = {};
             
             if (firstName.value == "") {
                 window.alert("Please enter your first name.");
                 firstName.focus();
                 return false;
             }
+            profile.firstName = firstName.value;
+            
             if (lastName.value == "") {
                 window.alert("Please enter your last name.");
                 lastName.focus();
                 return false;
             }
+            profile.lastName = lastName.value;
+            
             if (dateBirth.value == "") {
                 window.alert("Please enter your birthday.");
                 dateBirth.focus();
                 return false;
             }
+            profile.dateBirth = dateBirth.value;
+            
             console.log("genders: " + genders);
             
             let gender = "";
@@ -48,6 +55,7 @@ git push
                    break;
                }               
             } 
+            profile.gender = gender;
             
             let gs = [...genders]; 
             let gselected = gs.find(item => item.checked);
@@ -64,21 +72,28 @@ git push
                 address.focus();
                 return false;
             }
+            profile.address = address.value;
+            
             if (email.value == "") {
                 window.alert("Please enter a valid e-mail address.");
                 email.focus();
                 return false;
             }
+            profile.email = email.value;
+            
             if (phone.value == "") {
                 window.alert("Please enter your telephone number.");
                 phone.focus();
                 return false;
             }
+            profile.phone = phone.value;
+            
             if (password.value == "") {
                 window.alert("Please enter your password");
                 password.focus();
                 return false;
             }
+            profile.password = password.value;
 
             if (courses.selectedIndex < 0) {
                 alert("Please enter your course.");
@@ -91,28 +106,33 @@ git push
                 alert("Select no more than 2.");
                 courses.focus();
                 return false;
-            }            
+            }   
+            const selectedCourses = courses.selectedOptions;
+            const selected = [...selectedCourses];
+            profile.courses = selected.map(o => o.value);
+            
             if (comments.length < 10) {
                 alert("We appreciate your comments");
                 comments.focus();
                 return false;
             }
+            profile.comments = comments.value;
+            
+            localStorage.setItem("profile", profile);
+            
             return true;
+        }
+        
+        function checkName(textInput){
+           if (textInput.value.length < 2){             
+             alert("Please give your good name."); 
+             textInput.focus();   
+           }
+
         }
     </script>
 
     <style>
-        validate {
-            margin-left: 70px;
-            font-weight: bold;
-            float: left;
-            clear: left;
-            width: 100px;
-            text-align: left;
-            margin-right: 10px;
-            font-family: sans-serif, bold, Arial, Helvetica;
-            font-size: 14px;
-        }
         div {
             box-sizing: border-box;
             width: 100%;
@@ -123,7 +143,7 @@ git push
         }
         form {
             margin: 0 auto;
-            width: 600px;
+            width: 400px;
         }
     </style>
 </head>
@@ -133,11 +153,11 @@ git push
     <form id="regForm" onsubmit="return process();">  <!-- "return false;" keeps the input values -->
 
         <p>First Name:
-            <input type="text" size=65 name="firstName"> </p>
+            <input type="text" size=65 name="firstName" onchange = "checkName(this);"> </p>
         <p>Last Name:
             <input type="text" size=65 name="lastName"> </p>
         <p>Date of Birth:
-            <input type="text" size=65 name="dateBirth"> </p>
+            <input type="date" size=65 name="dateBirth"> </p>
         <p>Please select your gender:</p>
             <input type="radio" name="gender" value="male">Male<br>
             <input type="radio" name="gender" value="female">Female<br>
@@ -145,7 +165,7 @@ git push
         <p> Address:
             <input type="text" size=65 name="address"> </p>
         <p>E-mail Address:
-            <input type="text" size=65 name="email"> </p>
+            <input type="email" size=65 name="email"> </p>
         <p>Password:
             <input type="password" size=65 name="password"> </p>
         <p>Telephone:
