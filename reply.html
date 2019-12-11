@@ -1,0 +1,40 @@
+<!doctype html>
+<!--
+to format html, use https://htmlformatter.com/
+to edit online, use https://gitpod.io/#https://github.com/Yuman/html5
+in gitpod, save the changes and run
+git commit -am "commit comment"
+git push
+-->
+
+<html>
+
+<head>
+    <script>
+        var profile = JSON.parse(localStorage.getItem("profile"));
+        
+
+        function checkName(textInput){
+           if (textInput.value.length < 2){             
+             alert("Please give your good name."); 
+             textInput.focus();   
+           }
+
+        }
+    </script>
+
+</head>
+
+<body>
+    <h1 style="text-align: center">Thank you for signing up!</h1>
+<script>
+   let title = profile.gender == "male"?"Mr":"Ms";
+   const text = `Dear ${title} ${profile.firstName},`;
+   document.write(text);
+</script>
+
+
+
+</body>
+
+</html>
