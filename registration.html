@@ -118,8 +118,8 @@ git push
             }
             profile.comments = comments.value;
             
-            localStorage.setItem("profile", profile);
-            
+            localStorage.setItem("profile", JSON.stringify(profile));
+            window.location.href="reply.html";
             return true;
         }
         
@@ -150,7 +150,7 @@ git push
 
 <body>
     <h1 style="text-align: center"> REGISTRATION FORM </h1>
-    <form id="regForm" onsubmit="return process();">  <!-- "return false;" keeps the input values -->
+    <form id="regForm">  <!-- "return false;" keeps the input values -->
 
         <p>First Name:
             <input type="text" size=65 name="firstName" onchange = "checkName(this);"> </p>
@@ -185,7 +185,7 @@ git push
             <textarea cols="55" name="comments"> </textarea>
         </p>
         <p>
-            <input type="submit" value="send" name="Submit">
+            <input type="button" value="send" name="Submit" onclick="process()">
         </p>
     </form>
     
