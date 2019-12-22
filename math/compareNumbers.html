@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <h2>Number comparison</h2>
+
+    <input type="number" id="numberA" size=5 onchange="compare()">
+    <span id="comp"> </span>
+    <input type="number" id="numberB" size=5 onchange="compare()">
+
+    <script>
+        function compare() {
+            let numA =
+                document.getElementById("numberA").value;
+            let numB =
+                document.getElementById("numberB").value;
+
+            if (numA > numB) {
+                document.getElementById("comp").innerHTML = ">";
+            } else if(numA < numB){
+                document.getElementById("comp").innerHTML = "<";
+            } else{
+                document.getElementById("comp").innerHTML = "=";
+            }
+        }
+    </script>
+
+</body>
+
+</html>
