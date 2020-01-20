@@ -1,0 +1,36 @@
+//demonstrating processing characters in a string
+
+const phone = '+1(212)123-4567'
+
+let number = '';
+// simple for-loop
+for (let i = 0; i < phone.length; ++i){
+    if (0*phone[i] === 0){
+        number += phone[i];
+    }
+}
+console.log(`Simple-loop sanitized number: ${number}`)
+
+//complex loop
+number = '';
+for (let i = 0, c = ''; c = phone[i]; ++i){
+    if (0*c === 0){
+        number += phone[i];
+    }
+}
+console.log(`Complex-loop sanitized number: ${number}`)
+
+//for-each-of loop
+number = '';
+for (c of phone){
+    if (0*c === 0){
+        number += c;
+    }
+}
+console.log(`each-of-loop sanitized number: ${number}`)
+
+//spread for-each
+number = '';
+[...phone].forEach(c => {if(0*c===0) number += c})
+console.log(`Spread for-each sanitized number: ${number}`)
+
