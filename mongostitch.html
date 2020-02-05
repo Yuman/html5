@@ -4,35 +4,26 @@
 <head>
     <title> mongodb stictch</title>
     <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.6.0/stitch.js"></script>
+    <!--
+    https://docs.mongodb.com/stitch/mongodb/actions/collection.find/
+    -->
     <script>
         const client = stitch.Stitch.initializeDefaultAppClient('smc-zmmqo');
-
         const db = client.getServiceClient(stitch.RemoteMongoClient.factory, 'mongodb-atlas').db('test');
-
+        let retrieved;
         function fetchAll() {
-
             client.auth.loginWithCredential(new stitch.AnonymousCredential()).then(user =>
-                db.collection('signup').updateOne({
-                    owner_id: client.auth.user.id
-                }, {
-                    $set: {
-                        number: 42
-                    }
-                }, {
-                    upsert: true
-                })).then(() =>
-                db.collection('signup').find({
-                    owner_id: client.auth.user.id
-                }, {
+                db.collection('signup').find({}, {
                     limit: 100
                 }).asArray()).then(docs => {
                 console.log("Found docs", docs)
+                retrieved = docs;
+                displayComments(docs);
                 console.log("[MongoDB Stitch] Connected to Stitch")
             }).catch(err => {
                 console.error(err)
             });
         }
-
         function addProfile() {
             const newprofile = document.getElementById("new_profile");
             console.log("add profile", client.auth.user.id)
@@ -44,6 +35,14 @@
                 .then();
             new_profile.value = "";
         }
+        function displayComments(retrieved){
+            let commentsHTML = "<h2>Who said:</h2>";
+            for (let i = 0; i < retrieved.length; i++){
+                commentsHTML += retrieved[i].profile + "<br>";
+            }
+            document.getElementById("docsDisplay").innerHTML=commentsHTML;
+        }
+        
     </script>
 
 </head>
@@ -60,6 +59,9 @@
      <input type = "submit" value="Add" onClick = "addProfile()">
      <br>
      <input type = "submit" value="Fetch" onClick = "fetchAll()">
+     <div id="docsDisplay">
+     
+     </div>
 </body>
 
 </html>
