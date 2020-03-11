@@ -1,0 +1,111 @@
+<!-- https://www.mathsisfun.com/multiplication-table-10-small.html
+Generate a multiplication table of R rows and C columns (RxC)
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        BODY {
+            color: Black;
+            background-color: White;
+            font-family: Verdana, Tahoma, sans-serif;
+            font-size: 10px;
+        }
+        
+        table {
+            border-width: 2px;
+        }
+        
+        th {
+            font-size: 14px;
+            text-align: center;
+            border-style: solid;
+            border-width: 2px;
+            border-color: Black;
+        }
+        
+        td {
+            width: 30px;
+            font-size: 12px;
+            text-align: center;
+            margin-top: 12px;
+            border-style: solid;
+            border-width: 1px;
+            border-color: Black;
+        }
+        
+        .reverse {
+            font-size: 14px;
+            background: Black;
+            color: White;
+        }
+    </style>
+    <script>
+        let start = 1,
+            end = 10;
+
+        function getRange() {
+            start = Number.parseInt(document.getElementById("start").value);
+            end = Number.parseInt(document.getElementById("end").value);
+
+        }
+
+        function generate() {
+            getRange();
+            let size = end - start;
+            let mtable = "<table>";
+
+            mtable += "<tr><th class='reverse'><b>&times;</b></th>";
+            for (let c = start; c <= end; ++c) {
+                mtable += ("<th>" + c + "</th>");
+            }
+            mtable += "</tr>";
+
+            for (let r = start; r <= end; ++r) {
+                mtable += ("<tr><th>" + r + "</th>");
+                for (let c = start; c <= end; ++c) {
+                    mtable += ("<td>" + r * c + "</td>");
+                }
+            }
+            mtable += "<tr>";
+
+            mtable += "</table>";
+            document.getElementById("mtable").innerHTML = mtable;
+        }
+    </script>
+</head>
+
+<body>
+
+    <h2>Multiplication Table </h2> Given 2 numbers N and M, where N &lt; M, generate a multiplication table for numbers between them, inclusive.
+    <p>
+        <table>
+            <tr>
+                <td>From:</td>
+                <td>
+                    <input id="start" type="number" value=7>
+                </td>
+            </tr>
+            <tr>
+                <td>To:</td>
+                <td>
+                    <input id="end" type="number" value=13>
+                </td>
+            </tr>
+            <tr>
+                <td colspan=2>
+                    <input id="gen" type="button" value="Make Pretty xTable" onclick="generate();"> </td>
+            </tr>
+            </td>
+            </tr>
+        </table>
+        <p>
+
+            <div id="mtable">
+            </div>
+
+</body>
+
+</html>
