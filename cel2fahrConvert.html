@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<body>
+    <script>
+        let scale = "F";
+
+        function pickScale(pick) {
+            scale = pick;
+            if (pick === "C") {
+                document.getElementById("temp").min = -10;
+                document.getElementById("temp").max = 100;
+                document.getElementById("temp").value = 45;
+            }
+            if (pick === "F") {
+                document.getElementById("temp").min = 0;
+                document.getElementById("temp").max = 200;
+                document.getElementById("temp").value = 100;
+            }
+        }
+
+        function convert(temp) {
+            if (scale === "C") {
+                document.getElementById("cel").innerText = document.getElementById("temp").value;
+                document.getElementById("fahr").innerText = Math.round(document.getElementById("temp").value * 1.8 + 32);
+            }
+            if (scale === "F") {
+                document.getElementById("fahr").innerText = document.getElementById("temp").value;
+                document.getElementById("cel").innerText = Math.round((document.getElementById("temp").value - 32) / 1.8)
+            }
+        }
+    </script>
+
+    <h1>My Very Pretty Temperature Converter</h1> From:
+    <input type="radio" name="scale" value="C" onchange="pickScale('C')"> C
+    <input type="radio" name="scale" value="F" checked onchange="pickScale('F')"> F
+    <br> Slide to a value :
+    <input type="range" min="0" max="200" step "1" value="100" id="temp" onchange="convert(this.value)" />
+    <br>
+    <span id="cel"></span> &deg;C = <span id="fahr"></span>&deg;F
+
+</body>
+
+</html>
