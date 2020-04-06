@@ -89,18 +89,22 @@ for (let a=3; a < 50; a++){
 }
 
 let pfactors = function(num){
-  let factors=[]
-  for (let f =2 ; f<=num; f++){
-     if(num%f ===0) {
+  let factors = [1]
+  debugger;
+  for (let f = 2; f <= num; ){
+     if(num%f === 0) {
        let last = factors.pop();
-       if(last !== f){
-         factors.push(last);
-       }
-       factors.push(f); 
-       num = num/f;
-       f--;
-    }
+       factors.push(last);
+       if(last !== f){// new factor         
+         factors.push(f);         
+       }  
+       num /= f;    
+     }
+     else{ // not a factor
+      f++;
+     }     
   }
+  return factors.slice(1, factors.length);
 }
 </script>
 
