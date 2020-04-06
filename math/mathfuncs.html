@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
+
 <body>
-<script>
-function count(){
+	<script>
+		function count(){
  let input = document.getElementById("numbers").value;
  debugger;
  let numbs = input.split(" ");
@@ -20,22 +21,88 @@ function sum(){
  document.getElementById("result").innerText = sum;
 }
 
+let pfactors = function(){
+let num=60
+undefined
+let factors=[]
+undefined
+for (let f =2 ; f<=num; f++){
+   if(num%f ===0) {factors.push(f); 
+     num = num/f;
+}
+}
+console.log(factors)
+}
+	</script>
 
-</script>
+	<h2>Math bits</h2>
+
+	Examine a number<p>
+		<input id="numbers" type="text" />
+<p/>
+<button type="button" onclick="isOdd()">Is Odd?</button>
+<button type="button" onclick="isPrime()">Is Prime?</button>
+<button type="button" onclick="isPerfSq()">Is Perfect Square?</button><a href="https://www.mathsisfun.com/numbers/odd-square-number.html">
+<button type="button" onclick="decomp()">Decompose</button> <a href="https://www.mathsisfun.com/numbers/numbers-compose-decompose.html">
+<button type="button" onclick="isPerf()">Is Perfect?</button>
+<p>
+There are 16 primitive Pythagorean triples with c ≤ 100:
 
 
-<h2>Math bits</h2>
-
+Examine a sequence of numbers<p>
 <input id="numbers" type="text" />
 <p/>
 
-
 <button type="button" onclick="count()">Count</button> 
 <button type="button" onclick="sum()">Sum</button>
+<button type="button" onclick="average()">Average</button>
+<button type="button" onclick="max()">Max</button>
+<button type="button" onclick="min()">Min</button>
+
 <p/>
 <output id="result"/>
 
+<p>
+<input id="a" type="number" maxlength="4" size="4"> x<sup>2</sup> <input id="b" type="number" size="4"> x <input id="c" type="number" size="4"> = 0 <p>
+<button type="button" onclick="solve()">Quadratic-Solve</button>
+<p/>
+<output id="solution"/>
 
+Calculate Pi --https://www.mathsisfun.com/numbers/pi.html
+https://www.youtube.com/watch?v=3U7Hfz37GqA
+let pi=3
+for (let i=1; i<99; i++){ pi += 4/(i*2*(i*2+1)*(i*2+2))*(-1)**(i+1);}
+3.141592395970107
+
+<p id="demo"></p>
+
+<script>
+for (let a=3; a < 50; a++){
+  for (let b = a+1; b<51; b++){
+    for (let c = b+1; c<52; c++){
+       if (a*a + b*b === c*c){
+         document.getElementById("demo").innerText += a + ", "  +b + ", " +c +"\n" 
+       }
+    }
+  }
+
+}
+
+let pfactors = function(num){
+  let factors=[]
+  for (let f =2 ; f<=num; f++){
+     if(num%f ===0) {
+       let last = factors.pop();
+       if(last !== f){
+         factors.push(last);
+       }
+       factors.push(f); 
+       num = num/f;
+       f--;
+    }
+  }
+}
+</script>
 
 </body>
 </html>
