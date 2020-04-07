@@ -89,23 +89,22 @@ for (let a=3; a < 50; a++){
 }
 
 let pfactors = function(num){
-  let factors = [1]
+  let factors = []
   debugger;
   for (let f = 2; f <= num; ){
      if(num%f === 0) {
-       let last = factors.pop();
-       factors.push(last);
-       if(last !== f){// new factor         
+       if(factors[factors.length - 1] !== f ){// new factor         
          factors.push(f);         
        }  
        num /= f;    
      }
-     else{ // not a factor
-      f++;
+     else{ // not a divisor, move on
+       f++;
      }     
   }
-  return factors.slice(1, factors.length);
+  return factors;
 }
+
 </script>
 
 </body>
