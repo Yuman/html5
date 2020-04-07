@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+	<h1>Find all Pythagorean triples </h1>
+
+	https://www.youtube.com/watch?v=F9YtVqyps1s
+
+	<p>
+		<p id="demo"></p>
+
+		<script>
+			for (let a=3; a < 50; a++){
+  for (let b = a+1; b<51; b++){
+    for (let c = b+1; c<52; c++){
+       if (a*a + b*b === c*c){
+         document.getElementById("demo").innerText += a + ", "  +b + ", " +c +"\n" 
+       }
+    }
+  }
+
+}
+		</script>
+
+</body>
+
+</html>
