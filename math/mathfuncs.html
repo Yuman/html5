@@ -20,19 +20,6 @@ function sum(){
  }
  document.getElementById("result").innerText = sum;
 }
-
-let pfactors = function(){
-let num=60
-undefined
-let factors=[]
-undefined
-for (let f =2 ; f<=num; f++){
-   if(num%f ===0) {factors.push(f); 
-     num = num/f;
-}
-}
-console.log(factors)
-}
 	</script>
 
 	<h2>Math bits</h2>
@@ -79,16 +66,14 @@ for (let i=1; i<99; i++){ pi += 4/(i*2*(i*2+1)*(i*2+2))*(-1)**(i+1);}
 <script>
 for (let a=3; a < 50; a++){
   for (let b = a+1; b<51; b++){
-    for (let c = b+1; c<52; c++){
-       if (a*a + b*b === c*c){
-         document.getElementById("demo").innerText += a + ", "  +b + ", " +c +"\n" 
-       }
-    }
+     let c = Math.sqrt(a*a + b*b);
+      if (Math.round(c) === c){
+         console.log( a + ", " + b + ", " + c + "\n" );
+      }
   }
-
 }
 
-let pfactors = function(num){
+const pfactors = function(num){
   let factors = []
   debugger;
   for (let f = 2; f <= num; ){
