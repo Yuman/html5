@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <script src="math.js"> </script>
+  </head>
 
 <body>
 	<script>
 		function count(){
- let input = document.getElementById("numbers").value;
+ let input = document.getElementById("numberseq").value;
  debugger;
  let numbs = input.split(" ");
  document.getElementById("result").innerText = numbs.length;
 }
 
 function sum(){
- let input = document.getElementById("numbers").value;
+ let input = document.getElementById("numberseq").value;
  debugger;
  let numbs = input.split(" ");
  let sum = 0;
@@ -25,7 +28,7 @@ function sum(){
 	<h2>Math bits</h2>
 
 	Examine a number<p>
-		<input id="numbers" type="text" />
+		<input id="number" type="text" />
 <p/>
 <button type="button" onclick="isOdd()">Is Odd?</button>
 <button type="button" onclick="isPrime()">Is Prime?</button>
@@ -37,7 +40,7 @@ There are 16 primitive Pythagorean triples with c ≤ 100:
 
 
 Examine a sequence of numbers<p>
-<input id="numbers" type="text" />
+<input id="numberseq" type="text" />
 <p/>
 
 <button type="button" onclick="count()">Count</button> 
@@ -56,10 +59,14 @@ Examine a sequence of numbers<p>
 <output id="solution"/>
 
 Calculate Pi --https://www.mathsisfun.com/numbers/pi.html
-https://www.youtube.com/watch?v=3U7Hfz37GqA
-let pi=3
-for (let i=1; i<99; i++){ pi += 4/(i*2*(i*2+1)*(i*2+2))*(-1)**(i+1);}
-3.141592395970107
+
+https://www.youtube.com/watch?v=3U7Hfz37GqA<br>
+That gives:<br>
+<script>
+  debugger;
+  let val = pi();
+  document.write(val);
+</script>
 
 <p id="demo"></p>
 
