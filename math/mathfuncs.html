@@ -28,7 +28,7 @@ function sum(){
 	<h2>Math bits</h2>
 
 	Examine a number<p>
-		<input id="number" type="text" />
+		<input id="number" type="number" />
 <p/>
 <button type="button" onclick="isOdd()">Is Odd?</button>
 <button type="button" onclick="isPrime()">Is Prime?</button>
@@ -36,10 +36,15 @@ function sum(){
 <button type="button" onclick="decomp()">Decompose</button> <a href="https://www.mathsisfun.com/numbers/numbers-compose-decompose.html">
 <button type="button" onclick="isPerf()">Is Perfect?</button>
 <p>
-There are 16 primitive Pythagorean triples with c ≤ 100:
 
+	Examine two numbers<p>
+		<input id="numberA" type="number" /> &NonBreakingSpace; <input id="numberB" type="number" />
+</p>
+<button type="button" onclick="lcm()">Find LCM</button>
+<button type="button" onclick="gcd()">Find GCD</button>
 
-Examine a sequence of numbers<p>
+<p>
+Examine a sequence of numbers, separated by comma (,)<p>
 <input id="numberseq" type="text" />
 <p/>
 
