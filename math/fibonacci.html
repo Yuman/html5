@@ -8,7 +8,31 @@
 <h2>Fibonacci Numbers </h2>
 <div id="fibs"></div>
 <script>
-document.getElementById("fibs").innerText = fibo.sequences;
+document.getElementById("fibs").innerHTML = fibo.sequence;
+
+const next = function(){
+
+  let end = fibo.sequence[fibo.sequence.length-1];
+  let nxt = fibo.next();
+  let ratio = nxt/end;
+  document.getElementById('next').innerText = nxt;
+  document.getElementById('rati').innerText = `Golden Ratio = ${nxt}/${end} = ${ratio}`;
+}
+
+const grow = function(){
+  fibo.grow();
+  document.getElementById("fibs").innerHTML = fibo.sequence;
+}
 </script>
-<button type="button" onclick="fibo.next()">Next Value</button>
+
+<p>
+<button name="grow" type="button" onclick="grow();">Grow</button>
+
+<p>
+<button name="next" type="button" onclick="next()">Next Value</button>
+<output id="next"><br>
+<div id="rati"></div>
+
+
+
 </body>

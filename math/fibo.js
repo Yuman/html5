@@ -1,8 +1,9 @@
 const fibo = {
-  sequence: [1, 2];
+    
+  sequence: [1, 2],
 
-  next: () => sequence[sequence.length - 2] + sequence[sequence.length - 1];
+  next() {return this.sequence[this.sequence.length - 2] + this.sequence[this.sequence.length - 1]},
 
-  grow: () => sequence.push(next());
+  grow() {this.sequence.push(this.next())}
 
 }

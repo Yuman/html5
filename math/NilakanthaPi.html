@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" type="text/css" href="https://www.mathsisfun.com/style3.css" />
+
+	<script>
+		let pi = 3;
+      let t = 0;
+      let s = -1;
+      let newTerm = 0;
+      let newTermText = '';
+
+      const nextTerm = function(){
+        t++;
+        newTerm = (s**(t+1))*4/(2*t)/(2*t+1)/(2*t+2);
+        newTermText = s**(t+1) + `*4/(${(2*t)}*${(2*t+1)}*${(2*t+2)})`
+      }
+      
+      const update = function(){
+        nextTerm();
+        document.getElementById('nextTerm').innerText = newTermText + ` =  ${newTerm}`;
+        pi += newTerm;
+        document.getElementById('newPi').innerText = pi;
+      }
+	</script>
+</head>
+
+<body>
+	<h3>Calculating Pi</h3>
+	<p>There are many special methods used to calculate <span class="pi">&pi;</span> and here is one you can try yourself: it is called the <b>Nilakantha series</b> (after an Indian mathematician who lived in the years 1444–1544). </p>
+			<p>It goes on for ever and has this pattern:</p>
+			<p class="center larger">3 + <span class="intbl">
+							<em>4</em>
+							<strong>2&times;3&times;4</strong>
+							</span> &minus; <span class="intbl">
+									<em>4</em>
+									<strong>4&times;5&times;6</strong>
+							</span> + <span class="intbl">
+									<em>4</em>
+									<strong>6&times;7&times;8</strong>
+							</span> &minus; <span class="intbl">
+									<em>4</em>
+									<strong>8&times;9&times;10</strong>
+							</span> + ...</p>
+      <p>
+     <button name="next" type="button" onclick="update()">Next Term</button>  <span id="nextTerm"></span> 
+      <p>
+     Update Pi = <span id="newPi">3</span>
+
+
+</body>
