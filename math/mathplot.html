@@ -40,14 +40,15 @@
 	<form id="form">
 		<label for="eq">Enter an equation:</label>
   <input type="text" id="eq" value="4 * sin(x) + 5 * cos(x/2)" />
-  <input type="submit" value="Draw" />
+  <input type="submit" value="Draw" /><p>
+  <table>
+    <tr>
+     <td>x_min:</td><td><input type="number" id="xmin" value="-10" /></td></tr>
+     <td>x_max:</td><td><input type="number" id="xmax" value="10" /></td></tr>
+  </table>
 </form>
 
 <div id="plot"></div>
-
-<p>
-  Used plot library: <a href="https://plot.ly/javascript/">Plotly</a>
-</p>
 
 <script>
   function draw() {
@@ -56,11 +57,14 @@
       const expression = document.getElementById('eq').value
       const expr = math.compile(expression)
 
-      // evaluate the expression repeatedly for different values of x
-      const xValues = math.range(-10, 10, 0.5).toArray()
+      // evaluate the expression repeatedly for different values of 
+      const xmin = document.getElementById('xmin').value;
+      const xmax = document.getElementById('xmax').value;
+      const grid = (xmax-xmin)/20;
+      const xValues = math.range(xmin, xmax, grid).toArray();
       const yValues = xValues.map(function (x) {
         return expr.evaluate({x: x})
-      })
+      });
 
       // render the plot using plotly
       const trace1 = {
@@ -96,7 +100,12 @@
     for(let a = 1*lower, b = 1*upper; (b-a) > 0.0001;){
       aVal = expr.evaluate({x:a});
       bVal = expr.evaluate({x:b});
-      if (Math.abs(aVal) < 0.001) {
+      if (aVal*bVal > 0){
+          alert("The range must pass a root where f(x) = 0.")
+          root = "Try again."
+          break;
+      }
+      if (Math.abs(aVal) < 0.0001) {
         root = a;
         break;
       }
@@ -119,7 +128,6 @@ Provide a range over a root:<p>
 Lower: <input type="number" id="lower"/> <p>
 Upper: <input type="number" id="upper"/><p>
 <button onclick="solve()">Find the root in the range</button>
-<p>
 
 <output id="root">
 
