@@ -52,3 +52,58 @@ const fib = function (n) {
   }
   return fib;
 }
+
+const primefactors = function (num) {
+  let factors = []
+  for (let f = 2; f <= num;) {
+    if (num % f === 0) {
+      factors.push(f);
+      num /= f;
+    }
+    else { // not a divisor, move on
+      f++;
+    }
+  }
+  return factors;
+}
+
+const gcd = function (a, b) {
+  let cd = 1;
+  debugger
+  for (let apf = primefactors(a), bpf = primefactors(b); apf.length > 0 && bpf.length > 0;) {
+    if (apf[apf.length - 1] === bpf[bpf.length - 1]) {
+      return apf[apf.length - 1];
+    }
+    if (apf[apf.length - 1] > bpf[bpf.length - 1]) {
+      apf.pop();
+    } else {
+      bpf.pop();
+    }
+  }
+  return cd;
+}
+
+const gcdEuc = function (m, n) {
+  // https://iq.opengenus.org/euclidean-algorithm-greatest-common-divisor-gcd/
+  if (m === 0) return n;
+  if (n === 0) return m;
+  if (m > n) { return gcdEuc(n, m % n); }
+  else { return gcdEuc(m, n % m); }
+}
+
+const lcm = function (a, b) {
+  for (let cm = a; cm <= a * b; cm += a) {
+    if (cm % b === 0) return cm;
+  }
+}
+
+const selfDividing = function (num) {
+  debugger
+  for (let remainder = num, digit = 1; remainder > 1; remainder = Math.floor(remainder / 10)) {
+    digit = remainder % 10;
+    if (digit === 0 || num % digit > 0) {
+      return false;
+    }
+  }
+  return true;
+}
