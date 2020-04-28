@@ -85,10 +85,22 @@ const gcd = function (a, b) {
 
 const gcdEuc = function (m, n) {
   // https://iq.opengenus.org/euclidean-algorithm-greatest-common-divisor-gcd/
-  if (m === 0) return n;
-  if (n === 0) return m;
-  if (m > n) { return gcdEuc(n, m % n); }
-  else { return gcdEuc(m, n % m); }
+  //  https://www.youtube.com/watch?v=JUzYl1TYMcU&t=17s
+  if (m*n === 0){ return m + n;}
+  if (m < n) {[m, n] = [n, m];}
+  return gcdEuc(n, m % n);   
+}
+
+const gcdLoop = function(m, n){
+  for(; m*n > 0;){
+    if(m > n){
+      [m, n] = [n, m%n]
+    }
+    else{
+      [m, n] = [n, m];
+    }    
+  }
+  return m+n;
 }
 
 const lcm = function (a, b) {
