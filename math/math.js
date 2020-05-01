@@ -109,6 +109,15 @@ const lcm = function (a, b) {
   }
 }
 
+const lcmRec = function (a, b){
+  let c = a;
+  const cm = function (c, b){
+     if(c%b === 0) return c;
+     else return cm(c+a, b)
+  }
+  return cm(c, b);
+}
+
 const selfDividing = function (num) {
   debugger
   for (let remainder = num, digit = 1; remainder > 1; remainder = Math.floor(remainder / 10)) {
