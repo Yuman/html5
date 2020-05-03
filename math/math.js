@@ -92,6 +92,7 @@ const gcdEuc = function (m, n) {
 }
 
 const gcdLoop = function(m, n){
+  debugger
   for(; m*n > 0;){
     if(m > n){
       [m, n] = [n, m%n]
@@ -104,7 +105,7 @@ const gcdLoop = function(m, n){
 }
 
 const lcm = function (a, b) {
-  for (let cm = a; cm <= a * b; cm += a) {
+  for (let cm = a; ; cm += a) {
     if (cm % b === 0) return cm;
   }
 }

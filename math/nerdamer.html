@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<script src="https://cdn.jsdelivr.net/npm/nerdamer@1.1.4/nerdamer.core.js"></script> 
+<!-- LOAD ADD-ONS -->
+<script src="https://cdn.jsdelivr.net/npm/nerdamer@1.1.4/Algebra.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/nerdamer@1.1.4/Calculus.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/nerdamer@1.1.4/Solve.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/nerdamer@1.1.4/Extra.js"></script>
+</head>
+
+<body>
+	<h1>Symbolic Algebra</h1>
+
+<div id="expand"></div>
+<div id="solve"></div>
+<script>
+let result = nerdamer('a*(x+y)',null,'expand');
+
+document.getElementById('expand').innerHTML = '<p>'+result.text()+'</p>';
+//Solving equation
+let sol = nerdamer.solve('0=x^2+x+a','x');
+debugger
+document.getElementById('solve').innerHTML += '<p>'+sol.toString()+'</p>';
+</script
+
+</body>
+
+</html>
