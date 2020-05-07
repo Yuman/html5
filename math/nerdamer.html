@@ -2,23 +2,39 @@
 <html>
 
 <head>
-<script src="https://cdn.jsdelivr.net/npm/nerdamer@1.1.4/nerdamer.core.js"></script> 
-<!-- LOAD ADD-ONS -->
-<script src="https://cdn.jsdelivr.net/npm/nerdamer@1.1.4/Algebra.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/nerdamer@1.1.4/Calculus.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/nerdamer@1.1.4/Solve.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/nerdamer@1.1.4/Extra.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/nerdamer@1.1.4/nerdamer.core.js">
+
+	</script>
+	<!-- LOAD ADD-ONS -->
+	<script src="https://cdn.jsdelivr.net/npm/nerdamer@1.1.4/Algebra.js">
+
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/nerdamer@1.1.4/Calculus.js">
+
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/nerdamer@1.1.4/Solve.js">
+
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/nerdamer@1.1.4/Extra.js">
+
+	</script>
 </head>
 
 <body>
 	<h1>Symbolic Algebra</h1>
 
+	<input type="text" id="expr" size="35" value="a*(x+y)"><p>
+<button type="button" onclick="expand()">Expand</button>
+<button type="button">Solve</button>
 <div id="expand"></div>
 <div id="solve"></div>
 <script>
-let result = nerdamer('a*(x+y)',null,'expand');
 
-document.getElementById('expand').innerHTML = '<p>'+result.text()+'</p>';
+  function expand(){
+    let expr = document.getElementById('expr').value
+    let result = nerdamer(expr, null, 'expand');
+    document.getElementById('expand').innerHTML = '<p>'+result.text()+'</p>';
+  }
 //Solving equation
 let sol = nerdamer.solve('0=x^2+x+a','x');
 debugger

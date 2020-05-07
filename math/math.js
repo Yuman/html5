@@ -129,3 +129,4 @@ const selfDividing = function (num) {
   }
   return true;
 }
+

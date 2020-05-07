@@ -6,8 +6,11 @@
 
 <body>
 <h2>Fibonacci Numbers </h2>
+<img src="https://images.ctfassets.net/d7jrd3vkrjh8/5xLzWCnqaBFx6QUpvhuRhg/5c2a123771664463122cb0f8005e06de/fibonacci-initial-numbers-calculation.svg">
+<p>
 <div id="fibs"></div>
 <script>
+  debugger
 document.getElementById("fibs").innerHTML = fibo.sequence;
 
 const next = function(){
@@ -23,10 +26,30 @@ const grow = function(){
   fibo.grow();
   document.getElementById("fibs").innerHTML = fibo.sequence;
 }
+
+const shrink = function(){
+  fibo.shrink();
+  document.getElementById("fibs").innerHTML = fibo.sequence;
+}
+
+const growDown = function(){
+  fibo.growDown();
+  document.getElementById("fibs").innerHTML = fibo.sequence;
+}
+
+const shrinkDown = function(){
+  fibo.shrinkDown();
+  document.getElementById("fibs").innerHTML = fibo.sequence;
+}
 </script>
 
 <p>
-<button name="grow" type="button" onclick="grow();">Grow</button>
+
+<button name="grow" type="button" onclick="growDown();">&lt; Grow</button>
+<button name="shrink" type="button" onclick="shrinkDown();">Shrink &gt;</button>
+
+<button name="shrink" type="button" onclick="shrink();">&lt;Shrink</button>
+<button name="grow" type="button" onclick="grow();">Grow &gt;</button>
 
 <p>
 <button name="next" type="button" onclick="next()">Next Value</button>
