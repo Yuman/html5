@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <style>
+      .fib {
+        color: blue;
+        background-color: orange;
+        font-size: 200%;
+      }
+    </style>
     <script src="fibo.js"> </script>
   </head>
 
@@ -56,6 +63,13 @@ const shrinkDown = function(){
 <output id="next"><br>
 <div id="rati"></div>
 
-
+<div id="chain"></div>
+<script> 
+let html='';
+for (let i=0; i<fibo.sequence.length; i++){
+   html += ` <span class="fib" title="= 0 + 1; = 1+0">${fibo.sequence[i]}</span> `
+}
+document.getElementById("chain").innerHTML = html;
+</script>
 
 </body>
