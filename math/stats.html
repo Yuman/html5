@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Simple stats</title>
+  <script 
+  src='https://unpkg.com/simple-statistics@7.1.0/dist/simple-statistics.min.js'>
+  ////https://simplestatistics.org/docs/
+</script>
+
+	<script>
+		const populate = function(){
+       let nums = [];
+       for (let i = 0; i<30; i++){
+         nums.push(Math.round(Math.random()*100))
+      }
+      document.getElementById("nums").value = nums;
+    }
+
+	</script>
+</head>
+
+<body>
+	<h2>Statistics</h2>
+	<p>Enter math grades of students, separated by comma.
+		<br/>
+	 <textarea id="nums" rows="5" cols="33"> </textarea><p>
+
+  Min: <input type="number" id="min" /> Max: <input type="number" id="max" /> 
+  <button type="button" onclick="populate();">Auto-populate numbers</button>
+<p>
+<button type="button" onclick="populate();">Min</button>
+<button type="button" onclick="populate();">Max</button>
+<button type="button" onclick="populate();">Range</button>
+<button type="button" onclick="populate();">Mean</button>
+<button type="button" onclick="populate();">Median</button>
+<p>
+  <div id="result100"></div>
+
+<p>
+<button type="button">Convert grades to A-F scale:</button><p>
+
+ <textarea id="AFgrade" rows="2" cols="33"> </textarea><p>
+<p>
+
+<button type="button" onclick="populate();">Mode</button>
+
+<div id="resultAF"></div>
+
+
+</body>
+</html>

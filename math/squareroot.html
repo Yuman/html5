@@ -10,12 +10,12 @@
         1*document.getElementById('square').value;
         let guess =
         1*document.getElementById('guess').value;
-        if ((guess*guess - square) > 0.0001){          
+        if ((guess*guess - square) > 0.00001){          
           document.getElementById('root').innerText = `That is too big. A new guess is (${guess} + ${square}/${guess})/2 = ${(guess + square/guess)/2}`;
           document.getElementById('guess').value = (guess + square/guess)/2; 
           return;
         }
-        if ((square - guess*guess) > 0.0001){
+        if ((square - guess*guess) > 0.00001){
           document.getElementById('root').innerText = `That is too small. A new guess is (${guess} + ${square}/${guess})/2 = ${(guess + square/guess)/2}`;
           document.getElementById('guess').value = (guess + square/guess)/2;
           return;
@@ -28,7 +28,8 @@
 
 <body>
 	<h2>Calculating Square Root</h2>
-	<p>This is a rare cases where a wild guess goes a long way.
+	<p>This is a rare cases where a wild guess goes a long way. <p>
+    <a href="https://www.mathsisfun.com/square-root.html">A Fun Way to Calculate a Square Root</a>
 		<p>
 			Enter a number: <input type="number" id="square"/> <p>
   Make a guess: <input type="number" id="guess" /> <p>
