@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <style>
-      .fib {
-        color: blue;
-        background-color: orange;
-        font-size: 200%;
-      }
-    </style>
-    <script src="fibo.js"> </script>
-  </head>
+
+<head>
+	<style>
+		.fib {
+			color: blue;
+			background-color: orange;
+			font-size: 200%;
+		}
+	</style>
+	<script src="fibo.js">
+
+	</script>
+</head>
 
 <body>
-<h2>Fibonacci Numbers </h2>
-<img src="https://images.ctfassets.net/d7jrd3vkrjh8/5xLzWCnqaBFx6QUpvhuRhg/5c2a123771664463122cb0f8005e06de/fibonacci-initial-numbers-calculation.svg">
+	<h2>Fibonacci Numbers </h2>
+	<img src="https://images.ctfassets.net/d7jrd3vkrjh8/5xLzWCnqaBFx6QUpvhuRhg/5c2a123771664463122cb0f8005e06de/fibonacci-initial-numbers-calculation.svg">
 <p>
 <div id="fibs"></div>
 <script>
@@ -32,21 +35,25 @@ const next = function(){
 const grow = function(){
   fibo.grow();
   document.getElementById("fibs").innerHTML = fibo.sequence;
+  fibc()
 }
 
 const shrink = function(){
   fibo.shrink();
   document.getElementById("fibs").innerHTML = fibo.sequence;
+  fibc()
 }
 
 const growDown = function(){
   fibo.growDown();
   document.getElementById("fibs").innerHTML = fibo.sequence;
+  fibc()
 }
 
 const shrinkDown = function(){
   fibo.shrinkDown();
   document.getElementById("fibs").innerHTML = fibo.sequence;
+  fibc()
 }
 </script>
 
@@ -65,11 +72,13 @@ const shrinkDown = function(){
 
 <div id="chain"></div>
 <script> 
+const fibc = function(){
 let html='';
 for (let i=0; i<fibo.sequence.length; i++){
-   html += ` <span class="fib" title="= 0 + 1; = 1+0">${fibo.sequence[i]}</span> `
+   html += ` <span style="color:blue;background-color:orange;font-size:120%;" title="${fibo.sequence[i]/fibo.sequence[i-1]}">${fibo.sequence[i]}</span> `
 }
 document.getElementById("chain").innerHTML = html;
+}
 </script>
 
 </body>

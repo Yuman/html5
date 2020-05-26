@@ -8,6 +8,12 @@
   ////https://simplestatistics.org/docs/
 </script>
 
+<script 
+  src='https://cdnjs.cloudflare.com/ajax/libs/Faker/3.1.0/faker.min.js'
+// // https://github.com/marak/Faker.js
+// // count sort https://www.geeksforgeeks.org/median-and-mode-using-counting-sort/
+</script>
+
 	<script>
 		const populate = function(){
        let nums = [];
@@ -47,6 +53,14 @@
 
 <div id="resultAF"></div>
 
+<h2>Generated data </h2>
+<table>
+  <tr><th>Name</th><th>email</th></tr>
+<script>
+for(let i=0; i<10; i++)
+document.write(`<tr><td>${faker.name.findName()}</td><td>${faker.internet.email()}</td></tr>`)
+</script>
+<table>
 
 </body>
 </html>
