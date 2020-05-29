@@ -11,11 +11,14 @@
 		// https://github.com/marak/Faker.js //
 	// count sort // https://www.geeksforgeeks.org/median-and-mode-using-counting-sort/
 	</script>
+	<script src='algos.js'>
+	</script>
+
 	<script>
 		let nums = [];
 		const populate = function(){  
       nums = [];     
-      for (let i = 0; i<10; i++){
+      for (let i = 0; i<6; i++){
         nums.push(40 + Math.round(Math.random()*60))
       }
       document.getElementById("nums").value = nums;
@@ -56,26 +59,23 @@
     }
 
     const median = function(){
-      let counter = [];
-      for (let i = 0; i <= max(nums); i++){
-        counter[i] = 0;
-      }
-      
-      for (let i = 0; i < nums.length; i++){
-        counter[nums[i]]++;
-      }
+      let sorted = countingSort(nums);
 
-      let cumsum = 0, med = 0;
-      for (let i = 0; i < counter.length; i++){
-         cumsum += counter[i];
-         if(cumsum >= nums.length/2) {
-           med = i;
-           break;
-         }
-      }
+      let med = 0;
+      if (sorted.length % 2 === 1) {
+        med = sorted[sorted.length/2];
+      }else
+      {
+        med = (sorted[Math.floor((sorted.length-1)/2)] + sorted[sorted.length/2])/2;      
+      } 
 
       document.getElementById("result100").innerText = "Median = " + med;
     }
+
+    const convert2A = function(){
+      document.getElementById("AFgrade").value = nums.map(s=>s>=90?'A':s>=75?'B':s>=60?'C':s>=50?'D':'F');
+    }
+
 
 	</script>
 </head>
@@ -97,7 +97,7 @@
   <div id="result100"></div>
 
 <p>
-<button type="button">Convert grades to A-F scale:</button><p>
+<button type="button" onclick="convert2A();">Convert grades to A-F scale:</button><p>
 
  <textarea id="AFgrade" rows="2" cols="33"> </textarea><p>
 <p>
