@@ -18,7 +18,7 @@
 		let nums = [];
 		const populate = function(){  
       nums = [];     
-      for (let i = 0; i<6; i++){
+      for (let i = 0; i<9; i++){
         nums.push(40 + Math.round(Math.random()*60))
       }
       document.getElementById("nums").value = nums;
@@ -63,7 +63,7 @@
 
       let med = 0;
       if (sorted.length % 2 === 1) {
-        med = sorted[sorted.length/2];
+        med = sorted[Math.floor(sorted.length/2)];
       }else
       {
         med = (sorted[Math.floor((sorted.length-1)/2)] + sorted[sorted.length/2])/2;      
@@ -75,7 +75,27 @@
     const convert2A = function(){
       document.getElementById("AFgrade").value = nums.map(s=>s>=90?'A':s>=75?'B':s>=60?'C':s>=50?'D':'F');
     }
+    
+    const mode = function(grades){
+      let counter = {A:0, B:0, C:0, D:0, F:0};
+      for (let i = 0; i < grades.length; i++){
+        counter[grades[i]]++;        
+      }
+      let mG = '';
+      let maxCount = 0;
+      for (g in counter){
+        if (counter[g] > maxCount){
+          maxCount = counter[g];
+          mG = g;
+        }
+      }
+      return mG;
+    }
 
+    const common = function(){
+      let grades = document.getElementById("AFgrade").value;
+      document.getElementById("resultAF").innerText = mode(grades.split(','));
+    }
 
 	</script>
 </head>
@@ -102,7 +122,7 @@
  <textarea id="AFgrade" rows="2" cols="33"> </textarea><p>
 <p>
 
-<button type="button" onclick="populate();">Mode</button>
+<button type="button" onclick="common();">Mode</button>
 
 <div id="resultAF"></div>
 
