@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Binary Calculator</title>
+        <style>
+            .bodyClass {
+                width: 33%
+            }
+
+            #res{
+             background-color:lightgray;
+             border: solid;
+             height: 48px;
+             font-size: 20px;
+            }
+
+            .buttonContainer {
+                width: 100%;
+            }
+
+            .buttonContainer > .buttonClass {
+                    width: 25%;
+                    height: 36px;
+                    font-size: 18px;
+                    margin:0px;
+                    float:left;
+            }
+
+            #btn0 {
+              background-color:lightgreen;
+              color:brown;
+            }
+            #btn1 {
+              background-color:lightgreen;
+              color:brown;
+            }
+        </style>
+        <script>
+          function clr(){
+            document.getElementById("res").innerText = '';
+          }
+          function add0(){
+            document.getElementById("res").innerText += '0';
+          }
+          function add1(){
+            document.getElementById("res").innerText += '1';
+          }   
+          function addPlus(){
+            document.getElementById("res").innerText += '+';
+          } 
+          function addMinus(){
+            document.getElementById("res").innerText += '-';
+          }  
+          function addMul(){
+            document.getElementById("res").innerText += '*';
+          }  
+          function addDivide(){
+            document.getElementById("res").innerText += '/';
+          }   
+          function calc(){
+            const expr = document.getElementById("res").innerText;
+            const numsRe = /(\d+)\D(\d+)/g
+            const opsRe = /[\+\-\*\\]/
+            let nums = numsRe.exec(expr);            
+            let opr = opsRe.exec(expr);
+            let base10Expr = parseInt(nums[1], 2) + opr + parseInt(nums[2], 2);
+            let ans = eval(base10Expr)
+            document.getElementById("res").innerText = ans.toString(2);
+          }        
+        </script>
+
+    </head>
+    <body class="bodyClass">
+        <div id="btns" class="buttonContainer">
+            <div id="res"></div>
+            <button id="btn0" onclick="add0()" class="buttonClass">0</button>
+            <button id="btn1" onclick="add1()" class="buttonClass">1</button>
+            <button id="btnClr" onclick="clr()" style="background-color:darkgreen;color:white;" class="buttonClass">C</button>
+            <button id="btnEql" style="background-color:darkgreen;color:white;" class="buttonClass" onclick="calc()">=</button>
+            <button id="btnSum" onclick="addPlus()" class="buttonClass" style="background-color:black; color:red">+</button>
+            <button id="btnSub" onclick="addMinus()" class="buttonClass" style="background-color:black; color:red">-</button>
+            <button id="btnMul" onclick="addMul()"  class="buttonClass" style="background-color:black; color:red">*</button>
+            <button id="btnDiv" onclick="addDivide()"  class="buttonClass" style="background-color:black; color:red">/</button>      
+        </div>
+
+    </body>
+</html>

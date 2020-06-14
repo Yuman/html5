@@ -77,19 +77,22 @@
     }
     
     const mode = function(grades){
-      let counter = {A:0, B:0, C:0, D:0, F:0};
+      counter = {};
       for (let i = 0; i < grades.length; i++){
+        if(!(grades[i] in counter)){
+          counter[grades[i]] = 0;
+        }
         counter[grades[i]]++;        
       }
-      let mG = '';
+      let modeGrade = '';
       let maxCount = 0;
       for (g in counter){
         if (counter[g] > maxCount){
           maxCount = counter[g];
-          mG = g;
+          modeGrade = g;
         }
       }
-      return mG;
+      return modeGrade;
     }
 
     const common = function(){

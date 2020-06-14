@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Button Container</title>
+        
+        <style>
+            /* Style for the 'buttonContainer' class */
+            .buttonContainer {
+                width: 75%;
+            }
+            /* Style for 'buttonClass' elements inside a 'buttonContainer' 
+            
+               We can think of the '>' combinator as a sort of binary operator:
+               the syntax 'parent > child' specifies that we're selecting ONLY 
+               elements of type 'child' that are within elements of type 'parent'. 
+            */
+            .buttonContainer > .buttonClass {
+                    width: 30%;
+                    height: 48px;
+                    font-size: 24px;
+            }
+        </style>
+        <script>
+          let labels = [1, 2, 3, 6, 9, 8, 7, 4];
+          function rotate(){
+            labels.unshift(labels.pop())
+            document.getElementById("btn1").innerHTML = labels[0];
+            document.getElementById("btn2").innerHTML  = labels[1];
+            document.getElementById("btn3").innerHTML  = labels[2];
+            document.getElementById("btn6").innerHTML  = labels[3];
+            document.getElementById("btn9").innerHTML  = labels[4];
+            document.getElementById("btn8").innerHTML  = labels[5];
+            document.getElementById("btn7").innerHTML  = labels[6];
+            document.getElementById("btn4").innerHTML  = labels[7];
+          }
+        </script>
+    </head>
+    
+    <body>
+      Problem from Hackerrank -- https://www.hackerrank.com/challenges/js10-buttons-container/problem <p>
+        <div id="btns" class="buttonContainer">
+            <button id="btn1" class="buttonClass">1</button>
+            <button id="btn2" class="buttonClass">2</button>
+            <button id="btn3" class="buttonClass">3</button>
+            <button id="btn4" class="buttonClass">4</button>
+            <button id="btn5" class="buttonClass" onclick="rotate()">5</button>
+            <button id="btn6" class="buttonClass">6</button>
+            <button id="btn7" class="buttonClass">7</button>
+            <button id="btn8" class="buttonClass">8</button>
+            <button id="btn9" class="buttonClass">9</button>           
+        </div>
+    </body>
+</html>
