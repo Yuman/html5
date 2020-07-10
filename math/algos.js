@@ -71,3 +71,28 @@ const modeO = a =>
       return count;
     }, {})
   ).reduce((a, v) => v[0] < a[0] ? a : v, [0, null])[1];
+
+function bsort(a){
+  let totalSwaps = 0;
+  for (let i = 0; i < a.length; i++) {
+    // Track number of elements swapped during a single array traversal  
+    let swapsInLoop = 0;  
+    
+    for (let j = 0; j < a.length-1; j++) {
+        // Swap adjacent elements if they are in decreasing order
+        if (a[j] > a[j + 1]) {
+            [a[j], a[j+1]] = [a[j+1], a[j]];
+            totalSwaps++;
+            swapsInLoop++;
+        }
+    }
+    
+    // If no elements were swapped during a traversal, array is sorted
+    if (swapsInLoop === 0) {
+        break;
+    }
+  }
+  console.log(`Array is sorted in ${totalSwaps} swaps.`);
+  console.log(`First Element: ${a[0]}`);
+  console.log(`Last Element: ${a[a.length-1]}`);
+}

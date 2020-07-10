@@ -1,0 +1,47 @@
+<!doctype html>
+<!--
+https://stackoverflow.com/questions/18279141/javascript-string-encryption-and-decryption
+-->
+
+<html>
+
+<head>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o="
+	 crossorigin="anonymous">
+
+	</script>
+
+	<script>
+		const encrypt = function (plain, pass){
+      let encry = CryptoJS.AES.encrypt(plain, pass);
+      document.getElementById("encr").value = encry
+
+    }
+
+    const decrypt = function(encrypted, pass){
+      let plain= CryptoJS.AES.decrypt(encrypted, pass);
+      document.getElementById("plain").value = plain.toString(CryptoJS.enc.Utf8)
+    }
+	</script>
+
+</head>
+
+<body>
+	<h1 style="text-align: center">Keep your secrets</h1>
+
+	<p>
+		Plain message:<br>
+<textarea id="plain" rows=5 cols=60>
+</textarea>
+<p>
+Passphrase: <input type="password" id="pass">
+<button onclick="encrypt(plain.value, pass.value)">Encrypt</button>
+<button onclick="decrypt(encr.value, pass.value)">Decrypt</button>
+<p>
+  Encrypted message: <br>
+<textarea id="encr"  rows=5 cols=60>
+</textarea>
+
+</body>
+
+</html>

@@ -32,35 +32,77 @@
 		form {
 			margin: 20px 0;
 		}
+
+    .controllers .slider {
+      display: inline-block;
+      width:220px;
+      background-color:lightgreen;
+  }
 	</style>
 </head>
 
 <body>
 
-	<form id="form">
+	<form id="numberForm">
 		<label for="eq">Enter an equation:</label>
   <input type="text" id="eq" value="4 * sin(x) + 5 * cos(x/2)" />
-  <input type="submit" value="Draw" /><p>
-  <table>
-    <tr>
-     <td>x_min:</td><td><input type="number" id="xmin" value="-10" /></td></tr>
-     <td>x_max:</td><td><input type="number" id="xmax" value="10" /></td></tr>
-  </table>
+  <button  type="button"  onclick="draw(-10, 10)">Draw</button><p>
+</form>
+
+<script>
+  let lower = -10, upper = 10;
+
+  const recenter = function(slider) {
+    let current = slider.valueAsNumber;
+    let width = slider.max - slider.min;
+    let distance = current/10; // this varies {-0.5, 0.5}
+    lower = +lower + distance*width;
+    upper = +upper + distance*width;
+    slider.value = 0;
+    draw(lower, upper);
+  }
+
+  const zoom = function(slider){
+    let left = +slider.min;
+    let right = +slider.max;
+    let current = slider.valueAsNumber
+    let distance = current/5; // this varies {-1, 1}
+    let delta = (upper - lower)*distance/2;
+    lower = +lower - delta;
+    upper = +upper + delta;      
+
+    slider.value = 0;
+    draw(lower, upper);
+  }
+
+</script>
+<form id="slideForm">
+<div class="controllers" align="center">
+<span class="slider">
+  <h3 align="center">Pan</h3>
+  Left <input type="range" id="pan" name="pan"
+         min="-5" max="5" onchange="recenter(this)"> Right  
+</span>
+<span  class="slider">
+  <h3  align="center">Zoom</h3>
+  In <input type="range" id="zoomer" name="zoomer"
+         min="-5" max="5" onchange="zoom(this)"> Out  
+</span>
+</div>
 </form>
 
 <div id="plot"></div>
 
 <script>
-  function draw() {
+  function draw(xmin, xmax) {
     try {
       // compile the expression once
       const expression = document.getElementById('eq').value
       const expr = math.compile(expression)
 
       // evaluate the expression repeatedly for different values of 
-      const xmin = document.getElementById('xmin').value;
-      const xmax = document.getElementById('xmax').value;
-      const grid = (xmax-xmin)/20;
+
+      const grid = (xmax - xmin)/20;
       const xValues = math.range(xmin, xmax, grid).toArray();
       const yValues = xValues.map(function (x) {
         return expr.evaluate({x: x})
@@ -80,21 +122,19 @@
       alert(err)
     }
   }
-
-  document.getElementById('form').onsubmit = function (event) {
+/*
+  document.getElementById('numberForm').onsubmit = function (event) {
     event.preventDefault()
     draw()
   }
-
-  draw()
+*/
+  draw(-10, 10)
 </script>
 
 <script>
   const solve = function(){
     const expression = document.getElementById('eq').value
     const expr = math.compile(expression)
-    const lower = document.getElementById('lower').value
-    const upper = document.getElementById('upper').value
     let root = lower, aVal, bVal;
     debugger;
     for(let a = 1*lower, b = 1*upper; (b-a) > 0.0001;){
@@ -124,10 +164,8 @@
 }
 </script>
 
-Provide a range over a root:<p>
-Lower: <input type="number" id="lower"/> <p>
-Upper: <input type="number" id="upper"/><p>
-<button onclick="solve()">Find the root in the range</button>
+
+<button style="background-color:lightgreen;" onclick="solve()">Find the root in the range</button>
 
 <output id="root">
 

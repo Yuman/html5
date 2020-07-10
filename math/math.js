@@ -130,3 +130,5 @@ const selfDividing = function (num) {
   return true;
 }
 
+
+const encript = (msg, secr) => msg.split('').map(c=>c.charCodeAt(0)).map(n=>n^secr).map(n=>String.fromCharCode(n)).join('')
