@@ -1,107 +1,124 @@
 <!doctype html>
-
 <html>
-
-<head>
-	<script src='https://cdnjs.cloudflare.com/ajax/libs/Faker/3.1.0/faker.min.js'>
-		// https://github.com/marak/Faker.js
-	</script>
-
-	<script src="script/contacts.js">
-	</script>
-
-	<script>
-    let list = new Contacts();
-
-		const fill = function(){
-       contactname.value = faker.name.findName();
-       phone.value = faker.phone.phoneNumber()
-       email.value = faker.internet.email();
-       address.value = faker.address.streetAddress()
-    }
-
-    const edit = function (ctname){
-       let contact = list.getDetail(ctname);
-       contactname.value = contact.contactname;
-       phone.value = contact.phone;
-       email.value = contact.email;
-       address.value = contact.address;
-    }
-    const remove = function(cname){
-      list.remove(cname);
-      displayCount();
-      displayContacts();
-    }
-
-    const add = function(cname, phone, email, address){
-      let c = new Contact(cname, phone, email, address);
-      list.add(cname, c);
-      displayCount();
-      displayContacts();
-    }
-
-    const createActionButtons = function(contactname){
-       let buttonhtml= `<button onclick='edit("${contactname}")'>Edit</button>
-           <button onclick='remove("${contactname}")'>Delete</button>`
-        return buttonhtml;
-    }
-
-    const createRow = function(contact){
-      let rowHtml = `<tr>
-      <td>${contact.contactname}</td>
-      <td>${contact.phone}</td>
-      <td>${contact.email}</td>
-      <td>${contact.address}</td>
-      <td>${createActionButtons(contact.contactname)}</td>
-      </tr>`
-      return rowHtml;
-    }
-    
-    const displayContacts = function(){
-        let html = `<table>
-   <tbody>
-  <tr><th>Name</th><th>Phone</th><th>Email</th><th>Address</th>
-    <th>Action</th>
-  </tr>`;
-        for (const contact of list.getAll()){
-          html += createRow(contact)
-        }
-        html += `</tbody>
-</table> `;
-        recent.innerHTML = html;
-    }
-
-    const displayCount = function(){
-       total.innerHTML = `Total: ${list.count()}`;
-    }
-</script>
-
-</head>
-
-<body>
-	<h1 style="text-align: center">Contact Manager</h1>
-
-	<h2>
-		Add a contact:</h2>
-	<table>
-		<tr>
-			<td>Name:</td>
-			<td><input size="25" type="text" id="contactname"></td></tr>
-<tr><td>Phone:</td> <td> <input size="25"  type="text" id="phone"></td></tr>
-<tr><td>Email:</td> <td> <input size="25"  type="text" id="email"></td></tr>
-<tr><td>Address:</td> <td> <input size="25"  type="text" id="address"></td></tr>
-<tr><td></td> <td><button type="button" onclick="fill()">Auto Fill</button>
-<button type="button" onclick="add(contactname.value, phone.value, email.value, address.value)">Add to Contacts</button></td></tr>
-</table>
-
-<h2>Recently Added</h2>
-<div id="total">
-</div>
-<p>
-<div id="recent">
- 
-</div>
-
-</body>
-
+   <head>
+      <style>
+         table {
+         border-width: 2px;
+         }
+         th {
+         font-size: 14px;
+         text-align: center;
+         border-style: solid;
+         border-color: Black;
+         }
+         td {
+         width: 30px;
+         font-size: 12px;
+         text-align: center;
+         margin-top: 12px;
+         border-style: solid;
+         border-color: Black;
+         }
+      </style>
+      <script src='https://cdnjs.cloudflare.com/ajax/libs/Faker/3.1.0/faker.min.js'>
+         // https://github.com/marak/Faker.js
+      </script>
+      <script src="script/contacts.js"></script>
+      <script>
+         let list = new ContactMap();
+         
+         const fill = function(){
+            contactname.value = faker.name.findName();
+            phone.value = faker.phone.phoneNumber()
+            email.value = faker.internet.email();
+            address.value = faker.address.streetAddress()
+         }
+         
+         const edit = function (ctname){
+            let contact = list.getDetail(ctname);
+            contactname.value = contact.contactname;
+            phone.value = contact.phone;
+            email.value = contact.email;
+            address.value = contact.address;
+         }
+         const remove = function(cname){
+           list.remove(cname);
+           displayCount();
+           displayContacts();
+         }
+         
+         const add = function(cname, phone, email, address){
+           let c = new Contact(cname, phone, email, address);
+           list.add(cname, c);
+           displayCount();
+           displayContacts();
+         }
+         
+         const createActionButtons = function(contactname){
+            let buttonhtml= `<button onclick='edit("${contactname}")'>Edit</button>
+                <button onclick='remove("${contactname}")'>Delete</button>`
+             return buttonhtml;
+         }
+         
+         const createRow = function(contact){
+           let rowHtml = `<tr>
+           <td>${contact.contactname}</td>
+           <td>${contact.phone}</td>
+           <td>${contact.email}</td>
+           <td>${contact.address}</td>
+           <td>${createActionButtons(contact.contactname)}</td>
+           </tr>`
+           return rowHtml;
+         }
+         
+         const displayContacts = function(){
+             let html = `<table>
+         <tbody>
+         <tr><th>Name</th><th>Phone</th><th>Email</th><th>Address</th>
+         <th>Action</th>
+         </tr>`;
+             for (const contact of list.getAll()){
+               html += createRow(contact)
+             }
+             html += `</tbody>
+         </table> `;
+             recent.innerHTML = html;
+         }
+         
+         const displayCount = function(){
+            total.innerHTML = `Total: ${list.count()}`;
+         }
+      </script>
+   </head>
+   <body>
+      <h1 style="text-align: center">Contact Manager</h1>
+      <h2>
+         Add a contact:
+      </h2>
+      <table>
+         <tr>
+            <td>Name:</td>
+            <td><input size="25" type="text" id="contactname"></td>
+         </tr>
+         <tr>
+            <td>Phone:</td>
+            <td> <input size="25"  type="text" id="phone"></td>
+         </tr>
+         <tr>
+            <td>Email:</td>
+            <td> <input size="25"  type="text" id="email"></td>
+         </tr>
+         <tr>
+            <td>Address:</td>
+            <td> <input size="25"  type="text" id="address"></td>
+         </tr>
+      </table>
+      &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<button type="button" onclick="fill()">Auto Fill</button>
+      <button type="button" onclick="add(contactname.value, phone.value, email.value, address.value)">Add to Contacts</button>
+      <h2>Recently Added</h2>
+      <div id="total"></div>
+      <p>
+      <div id="recent">
+      </div>
+   </body>
 </html>

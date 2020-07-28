@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script>
+    const triangle = {
+      longSide:0, midSide:0, shortSide:0,
+      area:0, height:0,
+
+      getPerimeter(){
+        return +this.longSide + this.midSide + this.shortSide;
+      },
+
+      getArea(){
+        let s = this.getPerimeter()/2;
+        this.area = Math.sqrt(s*(s - this.longSide)*(s - this.midSide)*(s - this.shortSide));
+        return this.area;
+      },
+
+      getHeight(){
+         this.height = 2* this.getArea()/this.longSide;
+         return this.height;
+      },
+
+      getPoints(){
+        let origin = {x:0, y:0};
+        let flatFar ={x:this.longSide, y:0};
+        let apex = {x:Math.sqrt((this.shortSide)**2 - (this.getHeight())**2), y:this.getHeight()};
+        return [origin, flatFar, apex];
+      }
+
+    }
+  </script>
+
+</head>
+
+<body>
+	<h1>Triangle evaluator</h1>
+
+Design an html5 app that evaluates triangles.
+
+Use 3 input boxes to let the user enter the three sides by length. Validate that the input values are between 1 and 300. Do not restrict the order of the values (e.g., the longest first)
+
+Validate that the lengths entered form a triangle; Otherwise, alert user to change the inputs, rejecting the inputs.
+
+If the input lengths form a triangle, draw the triangle with the following instruction:
+https://www.w3schools.com/graphics/svg_polygon.asp
+
+
+Use big letters to inform the user:
+That is a "SCALENE" or "EQUILATERAL" or "ISOSCELES" or "RIGHT" triangle. It has an area of ___, a base of ___ and a height of ___.
+<p>
+  https://owlcation.com/stem/Calculator-Techniques-for-Circles-and-Triangles-in-Plane-Geometry
+
+
+
+<svg id ="gbox" height="500" width="500">
+  <polygon id="polyg" points="200,10 250,190 160,210" style="fill:lime;stroke:purple;stroke-width:1" />
+</svg>
+
+<script>
+  triangle.longSide=500;
+  triangle.midSide=400;
+  triangle.shortSide=300;  
+  let pts = triangle.getPoints();
+  debugger;
+  let html =`
+   <polygon id="polyg" points="${pts[0].x},${pts[0].y} ${pts[1].x},${pts[1].y} ${pts[2].x},${pts[2].y}" style="fill:lime;stroke:purple;stroke-width:1" />`
+  gbox.innerHTML=html;
+  ;
+</script>
+
+
+</body>
+</html>
+
