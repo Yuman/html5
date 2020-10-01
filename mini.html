@@ -1,0 +1,55 @@
+<!doctype html>
+
+<html>
+
+<head>
+  <!--
+https://css-tricks.com/snippets/javascript/get-url-and-url-parts-in-javascript/
+  -->
+    <script>
+      let chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+      const createToken = function(){
+         let tok = '';
+         for (let i = 0; i < 7; i++){
+           tok += chars[Math.floor(Math.random()*62)]
+         }
+         if(localStorage.getItem(tok)){
+           tok = createToken();
+         }
+         return tok;
+      }
+
+
+      debugger
+      let search = window.location.search 
+      let param = search.split('?')[1]
+      console.log(param)
+      let tok = '';
+      if(localStorage.getItem(param)){
+        tok = localStorage.getItem(param);
+      }
+      else{
+        tok = createToken();
+        localStorage.setItem(tok, param);
+        localStorage.setItem(param, tok);
+      }
+      let miniTxt = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname + '?' + tok;
+    </script>
+
+</head>
+
+<body>
+    <h1 style="text-align: center">Mini shortens your URLs.</h1>
+    <p> Provide the long URL as a parameter, like ?longURL
+
+    <div id='mini'></div>
+
+    <script>
+      mini.innerText = miniTxt;
+    </script>
+
+
+</body>
+
+</html>

@@ -42,3 +42,19 @@ console.log("Before: ", pens);
 
 // MDN documentation for Array:
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
+
+
+var checkStraightLine = function(coordinates) {
+const [x1, y1] = coordinates[0]
+const [x2, y2] = coordinates[1]
+
+let slope = (y1 - y2) / (x1 - x2);
+let intercept = y1 - slope*x1;
+
+for (let i = 2; i < coordinates.length; i++){
+  if (slope != ((coordinates[i][1] - coordinates[i-1][1])/(coordinates[i][0] - coordinates[i-1][0]))){
+   return false;
+  }
+}
+   return true;
+};
