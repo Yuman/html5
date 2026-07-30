@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Inner Solar System Simulation</title>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #000000;
+    color: #ddd;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+  }
+  h1 { font-size: 18px; margin: 4px 0 12px; }
+  #wrap { position: relative; width: 300px; height: 300px; }
+  canvas { background: #000000; display: block; }
+  #timeDisplay { font-size: 15px; color: #ADD8E6; margin-top: 10px; }
+  #tooltip {
+    position: absolute;
+    pointer-events: none;
+    background: rgba(20, 20, 20, 0.9);
+    color: #fff;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    display: none;
+    white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+<h1>Inner Solar System</h1>
+<div id="wrap">
+  <canvas id="scene" width="300" height="300"></canvas>
+  <div id="tooltip"></div>
+</div>
+<div id="timeDisplay">Elapsed Time (day): 0</div>
+<script>
+(function () {
+  const canvas = document.getElementById('scene');
+  const ctx = canvas.getContext('2d');
+  const tooltip = document.getElementById('tooltip');
+  const timeDisplay = document.getElementById('timeDisplay');
+  const W = canvas.width, H = canvas.height;
+  const CX = W / 2, CY = H / 2;
+  const DAYS_PER_SIM_SECOND = 365.25 / 60; // Earth's 60s period = 365.25 days
+
+  const bodies = [
+    { name: 'Sun', radiusPx: 20, orbitPx: 0, periodS: 0, color: '#FFA500' },
+    { name: 'Mercury', radiusPx: 1.9, orbitPx: 36, periodS: 14.5, color: '#9C9C9C' },
+    { name: 'Venus', radiusPx: 4.75, orbitPx: 66, periodS: 36.9, color: '#EED9A0' },
+    { name: 'Earth', radiusPx: 5, orbitPx: 92, periodS: 60, color: '#3366CC' },
+    { name: 'Mars', radiusPx: 2.65, orbitPx: 140, periodS: 112.8, color: '#CC3300' },
+  ];
+
+  // static starfield, generated once
+  const stars = [];
+  for (let i = 0; i < 150; i++) {
+    stars.push({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      r: Math.random() < 0.8 ? 0.6 : 1.1,
+      a: 0.4 + Math.random() * 0.6,
+    });
+  }
+
+  function position(body, tSec) {
+    if (body.orbitPx === 0) return { x: CX, y: CY };
+    const angle = (2 * Math.PI * tSec) / body.periodS; // start aligned at angle 0
+    return {
+      x: CX + body.orbitPx * Math.cos(angle),
+      y: CY + body.orbitPx * Math.sin(angle),
+    };
+  }
+
+  function drawStars() {
+    stars.forEach(s => {
+      ctx.fillStyle = `rgba(255,255,255,${s.a})`;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fill();
+    });
+  }
+
+  function drawOrbits() {
+    ctx.strokeStyle = 'rgba(255,255,255,0.25)';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([2, 3]);
+    bodies.forEach(b => {
+      if (b.orbitPx === 0) return;
+      ctx.beginPath();
+      ctx.arc(CX, CY, b.orbitPx, 0, Math.PI * 2);
+      ctx.stroke();
+    });
+    ctx.setLineDash([]);
+  }
+
+  function drawBodies(tSec) {
+    bodies.forEach(b => {
+      const p = position(b, tSec);
+      b._pos = p;
+      ctx.fillStyle = b.color;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, b.radiusPx, 0, Math.PI * 2);
+      ctx.fill();
+    });
+  }
+
+  function render(tSec) {
+    ctx.clearRect(0, 0, W, H);
+    drawStars();
+    drawOrbits();
+    drawBodies(tSec);
+  }
+
+  canvas.addEventListener('mousemove', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const mx = (e.clientX - rect.left) * (canvas.width / rect.width);
+    const my = (e.clientY - rect.top) * (canvas.height / rect.height);
+    let hovered = null;
+    for (const b of bodies) {
+      if (!b._pos) continue;
+      const d = Math.hypot(mx - b._pos.x, my - b._pos.y);
+      if (d <= Math.max(b.radiusPx, 4) + 3) { hovered = b; break; }
+    }
+    if (hovered) {
+      tooltip.style.display = 'block';
+      tooltip.textContent = hovered.name;
+      tooltip.style.left = (e.clientX - rect.left + 10) + 'px';
+      tooltip.style.top = (e.clientY - rect.top + 10) + 'px';
+      canvas.style.cursor = 'pointer';
+    } else {
+      tooltip.style.display = 'none';
+      canvas.style.cursor = 'default';
+    }
+  });
+
+  canvas.addEventListener('mouseleave', () => {
+    tooltip.style.display = 'none';
+  });
+
+  let startTs = null;
+  function loop(ts) {
+    if (startTs == null) startTs = ts;
+    const tSec = (ts - startTs) / 1000;
+    render(tSec);
+    timeDisplay.textContent = 'Elapsed Time (day): ' + Math.trunc(tSec * DAYS_PER_SIM_SECOND);
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
